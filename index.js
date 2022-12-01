@@ -19,6 +19,8 @@ let questionData = [
 ]
 
 app.get('/', routes.index);
+app.get('/createuser', routes.createuser);
+app.post("/submitteduser",urlencodedParser, routes.submittedUser);
 
 app.get('/setApi' , (req, res) => {
     let setData = JSON.stringify(questionData)

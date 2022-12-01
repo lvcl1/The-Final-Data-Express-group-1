@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 const bcrypt = require("bcrypt")
 let password="pass"//will change later
 const salt=bcrypt.genSaltSync(10);
-console.log(salt)
+//console.log(salt)
 const hash=bcrypt.hashSync(password,salt)
 const { response } = require('express');
 
