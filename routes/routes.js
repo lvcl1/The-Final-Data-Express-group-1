@@ -53,3 +53,38 @@ exports.index = (req, res) => {
         })
     })
 }
+exports.createuser = (req, res) => {
+    res.render('createuser', {
+        title: 'Create User'
+    })
+}
+exports.submittedUser=(req,res)=>{
+    let user={
+        username:req.body.username,
+        password:req.body.password,
+        email:req.body.email,
+        age:req.body.age,
+        answer1:req.body.answer1,
+        answer2:req.body.answer2,
+        answer3:req.body.answer3
+    }
+    // let userRecord=`
+    // name: ${user.name}
+    // password: ${user.password}
+    // email: ${user.email}
+    // age: ${user.age}
+    // answer1: ${user.answer1}
+    // answer2: ${user.answer2}
+    // answer3: ${user.answer3}
+    // `;
+    // fs.appendFile("names.txt",personRecord,err=>{
+    //     if (err) throw err;
+    //     else console.log("saved");
+    // });
+    console.log(user)
+    // res.render("submitted",{
+    //     'title':"submitted",
+    //     "config":config,
+    //     "person":user
+    // })
+}
