@@ -1,5 +1,5 @@
 //for the password salting
-const bcrypt = require("bcryptjs")
+const bcrypt = require("bcrypt")
 let password="pass"//will change later
 const salt=bcrypt.genSaltSync(10);
 console.log(salt)
