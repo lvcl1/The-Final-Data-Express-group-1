@@ -11,3 +11,15 @@ exports.index = (req, res) => {
         title: 'Login Page'
     })
 }
+
+exports.login = (req, res) => {
+    let user = {
+        userName: req.body.userName,
+        password: req.body.password
+        
+    };
+    res.render('loggedin', {
+        title: 'Welcome',
+        "user": user
+    })
+}
