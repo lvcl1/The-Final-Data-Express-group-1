@@ -11,10 +11,19 @@ block content
         p Age: &nbsp;
             input(type="text" name="age")
         p Do you prefer dogs or cats?: &nbsp;
-            input(type="text" name="answer1")
+            a dogs
+            input(type="radio" name="answer1" value='1')
+            a cats
+            input(type="radio" name="answer1" value='2')
         p Pineapple on pizza?: &nbsp;
-            input(type="text" name="answer2" placeholder="True or False")
+            a yes
+            input(type="radio" name="answer2" value='1')
+            a no
+            input(type="radio" name="answer2" value='2')
         p Sub or dub for anime?: &nbsp;
-            input(type="text" name="answer3")
+            a sub 
+            input(type="radio" name="answer3" value='1')
+            a dub 
+            input(type="radio" name="answer3" value='2')
         p
             input(type="submit" value="send")
