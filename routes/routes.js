@@ -30,7 +30,7 @@ db.once('open', callback => {})
 
 //Create a schema to define the fields, validation requirements and defaults
 let questionSchema = mongoose.Schema({
-    usename: String,
+    username: String,
     password: String,
     email: String,
     age: String,
@@ -90,13 +90,37 @@ exports.submittedUser=(req,res)=>{
 }
 
 exports.login = (req, res) => {
+
+    Data.find((error, users) => {
+        if (error) return console.error(error);
+
+        var userinfo;
+
+        users.forEach(function(user) {
+            var username = user.username
+            var password = user.password
+
+            if(username == req.body.userName && password == req.body.password) {
+                res.render('loggedin', {
+                    title: 'Welcome',
+                    "user": user
+                })
+            } else {
+                res.render('index', {
+                    errrorLog: 'Invalid Credentials'
+                })
+            }
+        })
+
+    })
+
+
     let user = {
         userName: req.body.userName,
         password: req.body.password
         
     };
-    res.render('loggedin', {
-        title: 'Welcome',
-        "user": user
-    })
+
+
+    
 }
