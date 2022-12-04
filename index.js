@@ -22,7 +22,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 app.get('/', routes.index);
 app.get('/createuser', routes.createuser);
-app.post("/submitteduser",urlencodedParser, routes.submittedUser);
+app.post("/submitteduser", urlencodedParser, routes.submittedUser);
 
 app.get('/setApi' , (req, res) => {
     let setData = JSON.stringify(questionData)
