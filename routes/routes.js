@@ -59,15 +59,22 @@ exports.createuser = (req, res) => {
     })
 }
 exports.submittedUser=(req,res)=>{
-    let user={
-        username:req.body.username,
-        password:req.body.password,
-        email:req.body.email,
-        age:req.body.age,
-        answer1:req.body.answer1,
-        answer2:req.body.answer2,
-        answer3:req.body.answer3
-    }
+    let user = new Data({
+        username: req.body.username,
+        password: req.body.password,
+        email: req.body.email,
+        age: req.body.age,
+        answer1: req.body.answer1,
+        answer2: req.body.answer2,
+        answer3: req.body.answer3
+    })
+
+    user.save((error, user) => {
+        if (error) res.send(error);
+        console.log(`${req.body.username} added`)
+    })
+
+    res.redirect('/');
     // let userRecord=`
     // name: ${user.name}
     // password: ${user.password}
@@ -90,37 +97,45 @@ exports.submittedUser=(req,res)=>{
 }
 
 exports.login = (req, res) => {
-
     Data.find((error, users) => {
         if (error) return console.error(error);
 
         var userinfo;
+        var userset;
+        var check = false;
 
         users.forEach(function(user) {
-            var username = user.username
-            var password = user.password
-
+            let username = user.username
+            let password = user.password
+            console.log(user)
             if(username == req.body.userName && password == req.body.password) {
-                res.render('loggedin', {
-                    title: 'Welcome',
-                    "user": user
-                })
+                userinfo = user
+
+                userset = {
+                    userName: userinfo.username,
+                    password: userinfo.password
+                    
+                };
+                check = true;
             } else {
-                res.render('index', {
-                    errrorLog: 'Invalid Credentials'
-                })
+                
             }
         })
 
+        console.log(check)
+
+        if(check == true) {
+            res.render('loggedin', {
+                title: 'Welcome',
+                "user": userset,
+                users
+            })
+        } else {
+            res.render('index', {
+                errrorLog: 'Invalid Credentials'
+            })
+        }
+
     })
-
-
-    let user = {
-        userName: req.body.userName,
-        password: req.body.password
-        
-    };
-
-
     
 }
