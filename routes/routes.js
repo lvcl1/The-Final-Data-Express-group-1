@@ -39,6 +39,12 @@ let questionSchema = mongoose.Schema({
     answer3: String
 })
 
+let counterSchema = mongoose.Schema({
+    quesion: String,
+    answerOne: String,
+    answerTwo: String
+})
+
 // Create a model, Used for CRUD operations
 let Data = mongoose.model("People_Collection", questionSchema)
 
