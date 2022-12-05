@@ -10,4 +10,14 @@ block content
             input(type="submit", value='Login')
     p=errorLog
     p 
-        a(href='/createuser') Create User  
+        a(href='/createuser') Create User
+    table 
+        tr 
+            th Questions
+            th Answer One 
+            th Answer Two 
+        each item in questions
+            tr 
+                td #{item.quesion}
+                td #{item.answerOne}
+                td #{item.answerTwo}
