@@ -16,7 +16,9 @@ app.use(cookieParser('your passphrase here'))
 
 app.get('/', routes.index);
 app.get('/createuser', routes.createuser);
+app.get('/updateuser', routes.updateuser);
 app.post("/submitteduser", urlencodedParser, routes.submittedUser);
+app.post("/updateuser", urlencodedParser, routes.updateduser);
 app.get('/setApi', routes.setApi)
 app.get('/api', routes.getApi)
 

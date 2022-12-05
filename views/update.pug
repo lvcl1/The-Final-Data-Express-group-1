@@ -1,0 +1,29 @@
+extends layout
+
+block content
+    form(id="form" method="POST" action="/updateuser")
+        p Username: &nbsp;
+            input(type="text" name="userName")
+        p Password: &nbsp;
+            input(type="password" name="password")
+        p Email: &nbsp;
+            input(type="text" name="email")
+        p Age: &nbsp;
+            input(type="text" name="age")
+        p Do you prefer dogs or cats?: &nbsp;
+            a dogs
+            input(type="radio" name="answer1" value='dogs')
+            a cats
+            input(type="radio" name="answer1" value='cats')
+        p Pineapple on pizza?: &nbsp;
+            a yes
+            input(type="radio" name="answer2" value='yes')
+            a no
+            input(type="radio" name="answer2" value='no')
+        p Sub or dub for anime?: &nbsp;
+            a sub 
+            input(type="radio" name="answer3" value='sub')
+            a dub 
+            input(type="radio" name="answer3" value='dub')
+        p
+            input(type="submit" value="send")

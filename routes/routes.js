@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 const bcrypt = require("bcrypt")
 let password="pass"//will change later
 const salt=bcrypt.genSaltSync(10);
-console.log(salt)
+//console.log(salt)
 const hash=bcrypt.hashSync(password,salt)
 const { response } = require('express');
 
@@ -63,6 +63,11 @@ exports.index = (req, res) => {
 exports.createuser = (req, res) => {
     res.render('createuser', {
         title: 'Create User'
+    })
+}
+exports.updateuser = (req, res) => {
+    res.render('update', {
+        title: 'Update User'
     })
 }
 exports.submittedUser=(req,res)=>{
@@ -143,6 +148,81 @@ exports.submittedUser=(req,res)=>{
 
     res.redirect('/');
     console.log(user)
+}
+exports.updateduser=(req,res)=>{
+    Data.find((error, users) => {
+        users.forEach(function(user) {
+            let username = user.username
+            let password = user.password
+            //console.log(user)
+            if(username == req.body.userName && password == req.body.password) {
+                user.email= req.body.email
+                user.age= req.body.age
+                user.answer1= req.body.answer1
+                user.answer2= req.body.answer2
+                user.answer3= req.body.answer3
+                user.save()
+            }
+        })
+        var answerOne = 0
+        var answerTwo = 0
+        var answerThree = 0
+        var answerFour = 0
+        var answerFive = 0
+        var answerSix = 0
+        users.forEach(function(user){
+            let useranswer1 = user.answer1
+            let useranswer2 = user.answer2
+            let useranswer3 = user.answer3
+
+            if(useranswer1 == 'dogs'){
+                answerOne = answerOne + 1
+            }
+            else if(useranswer1 == 'cats'){
+                answerTwo = answerTwo + 1
+            }
+
+            if(useranswer2 == "yes"){
+                answerThree = answerThree + 1
+            }
+            else if(useranswer2 == "no"){
+                answerFour = answerFour + 1
+            }
+
+            if(useranswer3 == "sub"){
+                answerFive = answerFive + 1
+            }
+            else if(useranswer3 == "dub"){
+                answerSix = answerSix + 1
+            }
+        })
+        Counter.findById("638d2d6ddb1c1932d476f94e", (err, user) => {
+            if(err) res.send(err)
+            user.answerOne = answerOne
+            user.answerTwo = answerTwo
+            user.save((err, user) => {
+                if(err) res.send(err)
+            })
+        })
+        Counter.findById("638d2d6ddb1c1932d476f94f", (err, user) => {
+            if(err) res.send(err)
+            user.answerOne = answerThree
+            user.answerTwo = answerFour
+            user.save((err, user) => {
+                if(err) res.send(err)
+            })
+        })
+        Counter.findById("638d2d6ddb1c1932d476f950", (err, user) => {
+            if(err) res.send(err)
+            user.answerOne = answerFive
+            user.answerTwo = answerSix
+            user.save((err, user) => {
+                if(err) res.send(err)
+            })
+        })
+    })
+
+    res.redirect('/');
 }
 
 exports.setApi = (req, res) => {
